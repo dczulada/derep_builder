@@ -1,0 +1,9 @@
+vsac:
+  auth_url: https://vsac.nlm.nih.gov/vsac/ws
+  content_url: https://vsac.nlm.nih.gov/vsac/svs
+  utility_url: https://vsac.nlm.nih.gov/vsac
+  default_profile: eCQM Update 2020-05-07
+  default_program: CMS eCQM and Hybrid Measure
+  default_release: eCQM Update 2020-05-07
+# vsac_api_key, do not commit to version control (e.g., 'c58943d3-a663-4ee1-acf0-5ff4ce5d62e7')
+vsac_api_key: 
