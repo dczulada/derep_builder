@@ -60,11 +60,10 @@
 "CMS506":   {"type": "eh", "category": "Prevention and Treatment of Opioid and Substance Use Disorders", "episode_of_care": true},
 "CMS334":   {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true},
 "CMS529":   {"type": "eh", "category": "Hybrid", "episode_of_care": true},
-"CMS816":   {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true},
+"CMS816":   {"type": "eh", "category": "Preventable Healthcare Harm", "episode_of_care": true},
 "CMS819":   {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true},
 "CMS844":   {"type": "eh", "category": "Hybrid", "episode_of_care": true},
-"CMS871":   {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true},
-"CMS871":   {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true},
+"CMS871":   {"type": "eh", "category": "Preventable Healthcare Harm", "episode_of_care": true},
 "CMS986":   {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true},
 "CMS996":   {"type": "eh", "category": "Outpatient Quality Reporting", "episode_of_care": true},
 "CMS1028":  {"type": "eh", "category": "Pre-rulemaking", "episode_of_care": true}
