@@ -71,8 +71,8 @@ class Application
   def get_value_set_loader
     api = Util::VSAC::VSACAPI.new(config: APP_CONFIG['vsac'], api_key: APP_CONFIG['vsac_api_key'])
     ticket_granting_ticket = api.ticket_granting_ticket
-    options = { measure_defined: true }
-    vsac_options = { options: options, profile: 'MU2 Update 2022-05-05', ticket_granting_ticket: ticket_granting_ticket }
+    options = { measure_defined: true, release: 'eCQM Update 2022-05-05' }
+    vsac_options = { options: options, ticket_granting_ticket: ticket_granting_ticket }
     value_set_loader = Measures::VSACValueSetLoader.new(vsac_options)
     value_set_loader
   end
