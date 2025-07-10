@@ -22,7 +22,7 @@ class Application
     Dir.glob('measures/*.zip') do |measure_filename|
       # use cqm-parsers to extract a measure object from the zip file
       measure_file = File.new File.join(measure_filename)
-      cms_id = measure_filename[%r{measures/(.*?)v}m, 1]
+      cms_id = measure_filename.gsub('-', '')[%r{measures/(.*?)v}m, 1]
       # sometimes the connection with vsac can break, try a few times
       begin
         retries ||= 0
@@ -50,7 +50,11 @@ class Application
         if !sdc['dataElementAttributes'].nil?
           sdc_list << "<ul>"
           sdc['dataElementAttributes'].each do |dea|
-            sdc_list << "<li>#{dea[:attribute_name]}</li>"
+            if dea[:attribute_valueset]
+              sdc_list << "<li>#{dea[:attribute_name]} - #{dea[:attribute_valueset]}</li>"
+            else
+              sdc_list << "<li>#{dea[:attribute_name]}</li>"
+            end
           end
           sdc_list << "</ul>"
         end
@@ -63,18 +67,14 @@ class Application
     end
 
     status  = 200
-    headers = { "Content-Type" => "text/html" } 
+    headers = { "content-type" => "text/html" } 
     body    = ["<html><body><h1><ul>#{sdc_list.join}</ul></h1></body></html>"]
     [status, headers, body]
   end
 
   def get_value_set_loader
-    api = Util::VSAC::VSACAPI.new(config: APP_CONFIG['vsac'], api_key: APP_CONFIG['vsac_api_key'])
-    ticket_granting_ticket = api.ticket_granting_ticket
-    options = { measure_defined: true, release: 'eCQM Update 2022-05-05' }
-    vsac_options = { options: options, ticket_granting_ticket: ticket_granting_ticket }
-    value_set_loader = Measures::VSACValueSetLoader.new(vsac_options)
-    value_set_loader
+    vsac_options = { profile: APP_CONFIG['vsac']['default_profile'] }
+    value_set_loader = Measures::VSACValueSetLoader.new(options: vsac_options, vsac_api_key: APP_CONFIG['vsac_api_key'])
   end
 end
 
