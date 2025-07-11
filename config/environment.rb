@@ -1,1 +1,1 @@
-APP_CONFIG = YAML.safe_load(File.read(File.expand_path('derep_builder.yml', __dir__)), [], [], true)
+APP_CONFIG = YAML.safe_load(File.read(File.expand_path('derep_builder.yml', __dir__)), aliases: true)

@@ -24,7 +24,7 @@ class DataCriteriaAttributeBuilder
       end
       find_union_values
       @unions.each do |union_key, union_value|
-        @root_data_criteria[union_key] = union_value
+        @root_data_criteria[union_key] = union_value unless union_value.empty?
       end
       # Go through each statement for each library to find elements that have properties
       measure.cql_libraries.each do |cql_library|
@@ -300,7 +300,7 @@ class DataCriteriaAttributeBuilder
       end
     elsif rel_source['expression']['type'] && rel_source['expression']['type'] == 'Union'
       @root_data_criteria[rel_source['alias']] = rel_source['alias']
-      @root_data_criteria[statement['name']] = statement['name']
+      # @root_data_criteria[statement['name']] = statement['name']
       @unions[rel_source['alias']] = []
       @unions[statement['name']] = []
       @unionlist << rel_source
@@ -315,6 +315,10 @@ class DataCriteriaAttributeBuilder
       @root_data_criteria[query_source['alias']] = query_source['alias']
       @unions[query_source['alias']] = []
       @unionlist << query_source
+    elsif query_source['alias'] && query_source['expression']['type'] == 'Intersect'
+      @root_data_criteria[statement['name']] = query_source['alias']
+      @unions[query_source['alias']] = []
+      @unionlist << query_source
     end
     if query_source['expression']['dataType']
       if query_source['expression']['codes']
@@ -327,6 +331,10 @@ class DataCriteriaAttributeBuilder
         end
       end
     elsif query_source['expression']['type'] && query_source['expression']['type'] == 'Union'
+      @root_data_criteria[statement['name']] = statement['name']
+      @unions[statement['name']] = []
+      @unionlist << statement
+    elsif query_source['expression']['type'] && query_source['expression']['type'] == 'Intersect'
       @root_data_criteria[statement['name']] = statement['name']
       @unions[statement['name']] = []
       @unionlist << statement
